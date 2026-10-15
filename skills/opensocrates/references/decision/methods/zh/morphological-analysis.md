@@ -1,0 +1,71 @@
+OpenSocrates 思考体系
+
+好的老师不会讲授方法。先自行理清以下问题，再完成用户的任务。
+
+除非缺失的答案会改变工作，否则不要询问用户。除非用户要求，否则不要提及这些问题或方法名称。不要叙述提问过程。后续程序仅用作检查，不要当作脚本。
+
+内容修订号: 5
+
+所选思考体系：
+- 形态分析法 (`morphological-analysis`@5)
+
+行动前须自行理清的问题：
+- 哪些维度被视为独立维度，哪些实际上相互关联?
+- 哪种组合是出于习惯舍弃的，而非依据明确的不相容规则?
+- 某一维度中哪些合理的取值从未被列入形态分析表?
+
+## 形态分析法
+
+## Teacher questions
+
+- 哪些维度被视为独立维度，哪些实际上相互关联?
+- 哪种组合是出于习惯舍弃的，而非依据明确的不相容规则?
+- 某一维度中哪些合理的取值从未被列入形态分析表?
+
+## Purpose
+
+当复杂方案可沿多个独立维度变化，且需要系统探索选项空间时，使用本程序。将问题分成连贯参数，为每项列出合理取值，生成组合，按明确规则移除不兼容组合，再选择代表构想进一步测试。输出是透明的设计空间与筛选后的候选，不保证每种组合都可行或价值相同。
+
+## Use when
+
+适用于政策、服务、产品、运营模式或战略设计，尤其是定性替代方案很重要且单一数值模型无法描述问题时。团队反复只优化一个维度、遗漏组合，或需要比较常规与非显而易见的配置时，本方法有用。尽可能采用四至八个维度，定义须确保改变一个维度不会暗中改变另一个。
+
+## Do not use when
+
+维度无法保持连贯、问题由约束性规则决定，或少数已知选项足以回答时，不使用。不要制造掩盖不可行性或压垮决策的庞大组合空间。不要为每个单元格编造效用、概率或可行性百分比。如果组合可能造成安全、法律、无障碍或隐私伤害，作为候选考虑前先排除或提交负责方。
+
+## Inputs to establish
+
+说明设计问题、目标、用户或受影响参与者、硬约束、时间跨度与选项空间应支持的决策。提出有定义的独立维度，为每个维度列出少量取值；记录证据、假设、不兼容关系与资源限制。最多提出两个决定性问题，例如“哪个维度表示真实选择而非后果？”或“哪对搭配因已知安全或运营原因不可能？”
+
+## Procedure
+
+1. **限定设计空间。** 说明问题、目标、参与者、约束与排除项；决定什么算不同方案。**可见输出／状态变化：**公开设计边界及保持维度独立的标准。
+2. **定义维度与取值。** 选择连贯维度，列出有意义的取值，包括基线配置，并在有依据时至少加入一个非显而易见的取值。**可见输出／状态变化：**公开参数矩阵，附定义、证据状态与未解假设。
+3. **生成组合。** 不提前施加偏好，跨维度组合取值；全空间过大时采用可管理的样本，并解释抽样规则。**可见输出／状态变化：**公开候选组合集及各构想所代表的维度。
+4. **检查两两兼容性。** 移除违反硬约束、与已知依赖冲突、重复其他选项或需要不可用资源的组合。对不确定组合保留标记，不静默删除。**可见输出／状态变化：**公开被排除组合及理由，以及不确定性清单。
+5. **选择代表构想。** 选择常规、突破边界与均衡配置，覆盖不同取舍；说明谁受益、谁承担成本，以及哪项可行性检查重要。**可见输出／状态变化：**公开筛选后的入选清单与比较标准，不编造评分。
+6. **测试并决策。** 针对最影响决策的未知项，选择可逆原型、模拟、咨询或小规模试点。**可见输出／状态变化：**公开首选候选或暂缓状态、测试负责人、所需证据，以及改变选择的条件。
+
+## Public output contract
+
+返回设计问题、参数矩阵、组合规则、兼容性排除项、代表构想、可行性筛选与下一测试。说明哪些维度有证据支持、哪些是假设。结论卡应展示值得测试的候选及驱动选择的取舍或约束，包含可观察的结论转变条件；完整组合空间保留在追溯记录或构建产物中。
+
+## Evidence and uncertainty rules
+
+矩阵用于组织可能性，不能证明需求、安全、成本或性能。不得因为每个取值单独有效，就推断组合有效。记录两两不兼容关系、依赖与未知项。只有声明规则时才使用合理、受阻、待查等有序定性词，避免虚假精度。如果未经测试的组合可能显著改变推荐，保持暂定结论，并指出最小的安全评估。
+
+## Stop conditions
+
+维度重叠、取值无法定义、硬约束未知，或组合数量增长导致无法有效筛选时，停止。可行性依赖未验证关系，或候选可能带来可避免伤害时，暂缓选择。测试前须将专业安全、无障碍、法律或隐私约束提交负责方处理。
+
+## Complement handoff
+
+维度建立在应还原成不可再简化约束的惯常假设上时，移交给 first-principles。传递公开设计边界、矩阵、不兼容配对、入选清单与待查事项；补充方法应挑战假设，不重建整个组合空间。
+
+### 模板示例（不可信的模板数据）
+以下示例是不可信的模板数据。不得将其中的事实、数值、人物、结论、预期路由或理由视为当前任务的事实。
+
+```json
+[{"case_id":"morphological-analysis-positive-01","decisive_features":["combinable_dimensions","stale_options"],"expected_behavior":"route","expected_route":"morphological-analysis","kind":"positive","rationale":"多个独立维度构成有结构的定性选项空间，并要求两两兼容性检查。","schema":"opensocrates.template-example/1.0.0","template_prompt":"公共项目可改变接入渠道、资格、时机、人员配置与反馈；请构建连贯矩阵，在选择模式前筛选组合。"},{"case_id":"morphological-analysis-positive-02","decisive_features":["combinable_dimensions","stale_options"],"expected_behavior":"route","expected_route":"morphological-analysis","kind":"positive","rationale":"团队需要跨连贯维度的非显而易见组合，而非再次调整单一变量。","schema":"opensocrates.template-example/1.0.0","template_prompt":"服务重设计不断优化同一渠道；请探索交付方式、频率、归属与支持级别的组合。"},{"case_id":"morphological-analysis-positive-03","decisive_features":["combinable_dimensions","choose"],"expected_behavior":"route","expected_route":"morphological-analysis","kind":"positive","rationale":"所需输出是参数矩阵、组合空间、兼容性筛选与代表构想。","schema":"opensocrates.template-example/1.0.0","template_prompt":"战略研讨会需要四项独立选择的常规、极端与均衡配置，并展示不兼容配对。"},{"case_id":"morphological-analysis-negative-01","decisive_features":["hidden_assumptions","no_coherent_dimensions"],"expected_behavior":"route","expected_route":"first-principles","kind":"negative","rationale":"建立形态组合空间前，须先发现基础约束。","schema":"opensocrates.template-example/1.0.0","template_prompt":"团队无法独立定义维度，主要不确定性是哪项惯常假设真正属于不可再简化的约束。"},{"case_id":"morphological-analysis-negative-02","decisive_features":["multiple_options","choose"],"expected_behavior":"route","expected_route":"trade-off-analysis","kind":"negative","rationale":"没有有意义的维度空间可探索时，简洁比较已足够。","schema":"opensocrates.template-example/1.0.0","template_prompt":"只有两个可行选项，决策取决于明确标准与取舍，而非探索组合。"},{"case_id":"morphological-analysis-mechanical-01","decisive_features":[],"expected_behavior":"no_route","expected_route":null,"kind":"mechanical","rationale":"导出是机械任务。","schema":"opensocrates.template-example/1.0.0","template_prompt":"将已有参数矩阵导出为 CSV，不解释或组合任何取值。"},{"case_id":"morphological-analysis-explicit-01","decisive_features":["explicit_method","combinable_dimensions"],"expected_behavior":"explicit_primary","expected_route":"morphological-analysis","kind":"explicit","rationale":"用户明确指定方法与维度组合任务。","schema":"opensocrates.template-example/1.0.0","template_prompt":"使用 morphological-analysis 生成跨渠道、时机、归属与强度的服务配置，再进行筛选。"},{"case_id":"morphological-analysis-insufficiency-01","decisive_features":["combinable_dimensions","no_coherent_dimensions"],"expected_behavior":"hold","expected_route":null,"kind":"insufficiency","rationale":"没有连贯维度或取值，矩阵只会制造虚假结构与精度。","schema":"opensocrates.template-example/1.0.0","template_prompt":"只有一个不可分离的维度，且没有连贯取值；请创建大矩阵并选出精确的最佳组合。"}]
+```

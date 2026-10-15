@@ -1,0 +1,18 @@
+{
+  "name": "dsh-opensocrates",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "OpenSocrates 48 reasoning methods as a scoped DSH agent preset.",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-skill-filesystem": ">=0.1.0-rc.6"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-skill-filesystem": { "optional": true }
+  }
+}
