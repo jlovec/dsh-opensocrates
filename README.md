@@ -91,16 +91,37 @@ dsh plugin --profile <profile> add link:/home/joey/dsh/dsh-opensocrates
 dsh --profile <profile> --dump-config | grep -A3 preset-opensocrates
 ```
 
-卸载：
+> ⚠️ **先备份 `package.json`。** `dsh plugin` 的 add/remove 会触发 plugin-manager 的
+> `reconcile()`：它按 `dependencies` ∩ `pnpm-lock.yaml` 重算 `dsh.profile.bundles`，
+> 凡是**不在锁文件里**的 bundle 会被静默剔除（本机实测：一次 `remove` 连带剔除了
+> 8 个无关 bundle —— super-injector / aegis / mnemon / im-connect / tavern 等），
+> 并把它们的 `node_modules` 一并删掉。git/npm 安装的 bundle 若未被锁文件精确记录，
+> 就有这个风险。所以：
 
 ```sh
-dsh plugin --profile <profile> remove dsh-opensocrates
+cp ~/.dsh/profiles/<profile>/package.json /tmp/profile-package.json.bak
+# …安装/卸载…
+# 安装后立刻核对 bundles 数量与内容没有减少
 ```
+
+若已被剔除，用备份覆盖 `package.json` 后执行 `dsh plugin --profile <profile> install`
+即可精确还原（本机已用此法完整恢复 20/20 bundle、15/15 dependency），无需重启。
 
 > 预设声明由 `@deepseek-ai/dsh-web-app` bundle 提供（`agent-preset-registry`）。
 > `headless` profile 没有预设注册表，且其 one-shot runner 明确拒绝编排预设会话
 > （`dsh-headless/lib/index.js`：*"runs under agent preset … which the one-shot runner
 > does not compose"*），因此**验证必须用 web profile**。
+
+### 本插件不依赖任何宿主包
+
+`index.js` 只 import Node 内置模块，自己实现 skill provider 契约（`list` / `get`）。
+这是刻意的：早期版本 `import '@deepseek-ai/dsh-skill-filesystem'`，于是激活取决于
+loader 对**本包真实路径**的模块解析表；解析失败时预设行拿不到 fiber，注册表报
+`opensocrates-method-pack (dsh-opensocrates/index.js): never started` —— 预设照常出现在
+列表里，但**没有任何技能**，静默失效。改成零依赖后这一类失败被彻底消除。
+
+> 注意：若本服务**启动早于插件安装**，热加的预设行会停留在 `never started`。
+> 此时重新执行一次 `add`（无需重启）即可完成激活；本机已实测。
 
 ## 使用
 
@@ -125,15 +146,17 @@ node tools/build-payload.mjs --zip /tmp/chat.zip --locale zh
 
 ## 验证状态
 
-已实测（web profile + 临时 profile，真实 GUI 会话）：
+已实测（临时 profile + **本机 live `web` profile**，真实 GUI 会话）：
 
 - ✅ 预设出现在预设选择器中，描述正确
 - ✅ 选 `OpenSocrates` 的会话技能目录含 `opensocrates`
 - ✅ **反证**：切到 `Standard` 预设后同一目录**不含** `opensocrates` —— 作用域生效
 - ✅ 主流程：agent 加载技能 → 读取 zh guide / features / catalog → 读取
-  `trade_methods/zh/trade-off-analysis.md` 等 4 篇方法完整正文
+  `methods/zh/trade-off-analysis.md` 等 4 篇方法**完整正文**（临时 profile 与 live profile 各验一次）
+- ✅ live `web` profile 安装后注册表无 `broken` 诊断，`/api/agentPresets/list` 返回健康行
 - ✅ 48/48 zh 方法与上游 manifest 哈希一致
 - ✅ 零死链
+- ✅ 从 `git+https://github.com/jlovec/dsh-opensocrates.git` 装到干净 profile 并跑通
 
 未验证 / 已知边界：
 
